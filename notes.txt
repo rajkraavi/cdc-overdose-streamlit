@@ -3,14 +3,6 @@ CDC Drug Overdose Surveillance Dashboard — Demo Script
 Posit Demo | Author: Raj Ravi
 
 
-OPENING (30 seconds)
----------------------
-"What I'm about to show you is a fully interactive drug overdose surveillance dashboard pulling live
-data directly from the CDC — no downloads, no spreadsheets, no manual updates. Every number you see
-is coming straight from the government's public health database in real time. And the entire thing
-was built in Python using a framework called Streamlit, in a single file — running side by side with
-an R Shiny app on the exact same Posit Connect server."
-
 
 WHAT IS STREAMLIT? (1 minute)
 ------------------------------
