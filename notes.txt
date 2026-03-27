@@ -3,22 +3,6 @@ CDC Drug Overdose Surveillance Dashboard — Demo Script
 Posit Demo | Author: Raj Ravi
 
 
-
-WHAT IS STREAMLIT? (1 minute)
-------------------------------
-"So — what is Streamlit? Think of it this way: normally, Python is a tool that data scientists use
-to analyze data, build models, and generate charts. The results stay on your screen and nobody else
-can see them. Streamlit changes that completely.
-
-Streamlit lets you take your Python code and turn it into a live web application — one that anyone
-can open in a browser, explore on their own, and interact with — no coding required, no installation,
-nothing. You go from data analysis to a shareable web app without ever leaving Python.
-
-What makes it powerful is automatic reactivity. Every filter, every slider, every dropdown is wired
-to every chart simultaneously. When you move the year slider — the trend lines update, the KPI cards
-update, the map updates — all at once. It feels instant, because it is."
-
-
 WHY THIS MATTERS FOR POSIT (1 minute)
 --------------------------------------
 "Here's where it gets interesting. Your organization probably has R users and Python users. Shiny
