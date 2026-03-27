@@ -21,11 +21,36 @@ st.set_page_config(
 st.markdown("""
 <style>
 [data-testid="stSidebar"] { background-color: #003087; }
-[data-testid="stSidebar"] .stMarkdown,
-[data-testid="stSidebar"] .stMarkdown p,
+
+/* Text white — avoid div to prevent revealing hidden aria elements */
 [data-testid="stSidebar"] label,
-[data-testid="stSidebar"] span { color: #ffffff !important; }
+[data-testid="stSidebar"] p,
+[data-testid="stSidebar"] span,
+[data-testid="stSidebar"] a,
+[data-testid="stSidebar"] [data-testid="stWidgetLabel"] { color: #ffffff !important; }
 [data-testid="stSidebar"] hr { border-color: #4a7ab5; }
+
+/* Slider — thumb handles */
+[data-testid="stSidebar"] [data-testid="stSlider"] [role="slider"] {
+    background-color: #ffffff !important;
+    border: 3px solid #ffffff !important;
+    box-shadow: 0 0 0 2px #4a7ab5 !important;
+}
+/* Slider — full track rail (unselected) */
+[data-testid="stSidebar"] [data-testid="stSlider"] [data-testid="stTickBar"],
+[data-testid="stSidebar"] [data-testid="stSlider"] > div > div > div { background: rgba(255,255,255,0.25) !important; }
+/* Slider — selected range fill */
+[data-testid="stSidebar"] [data-testid="stSlider"] > div > div > div > div { background: #ffffff !important; }
+
+/* Multiselect — dark background, white text */
+[data-testid="stSidebar"] [data-baseweb="select"] > div { background-color: #1a4a8a !important; border-color: #4a7ab5 !important; }
+[data-testid="stSidebar"] [data-baseweb="select"] input { color: #ffffff !important; }
+[data-testid="stSidebar"] [data-baseweb="select"] input::placeholder { color: #aac4e8 !important; }
+[data-testid="stSidebar"] [data-baseweb="tag"] { background-color: #2960b0 !important; border-color: #4a7ab5 !important; }
+[data-testid="stSidebar"] [data-baseweb="tag"] span { color: #ffffff !important; }
+
+/* Tag pills at bottom — visible on dark blue */
+[data-testid="stSidebar"] .tag-pill { background: #1a4a8a; color: #ffffff !important; border: 1px solid #4a7ab5; }
 
 .kpi-card {
     background: white;
@@ -144,7 +169,7 @@ us_overdose  = (df[(df["state"] == "US") &
 
 # ── Sidebar ────────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown("## 🏥 CDC Overdose Dashboard")
+    st.markdown("## CDC Overdose Dashboard")
     st.markdown("*VSRR Provisional Death Counts*")
     st.markdown("---")
 
