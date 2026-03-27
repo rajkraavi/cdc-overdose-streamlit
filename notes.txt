@@ -3,20 +3,6 @@ CDC Drug Overdose Surveillance Dashboard — Demo Script
 Posit Demo | Author: Raj Ravi
 
 
-WHY THIS MATTERS FOR POSIT (1 minute)
---------------------------------------
-"Here's where it gets interesting. Your organization probably has R users and Python users. Shiny
-developers and Streamlit developers. Historically, those teams have lived on separate platforms,
-with separate deployment processes, separate access controls, separate infrastructure.
-
-Posit Connect eliminates that entirely.
-
-This Python Streamlit app and an R Shiny app — both live on the same Connect server, share the same
-URL structure, are governed by the same access control policies, and are managed from the same admin
-panel. One platform, one workflow, two languages. Your teams don't have to compromise on the tools
-they love."
-
-
 SIDEBAR CONTROLS (30 seconds)
 -------------------------------
 "On the left, I have three controls: a Year Range slider, a State filter, and a Drug Category
