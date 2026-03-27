@@ -1,134 +1,186 @@
-CDC Drug Overdose Surveillance Dashboard — Posit Connect Demo Notes
-====================================================================
-Author: Raj Ravi
-Last Updated: March 2026
-
-OVERVIEW
---------
-This Streamlit app visualizes provisional drug overdose death counts from the CDC's
-Vital Statistics Rapid Release (VSRR) program. Data is pulled live from data.cdc.gov
-via a public API and cached for 1 hour. The dashboard is designed to run on Posit Connect
-alongside an equivalent R Shiny app, demonstrating Posit's polyglot (R + Python) platform.
+CDC Drug Overdose Surveillance Dashboard — Demo Script
+=======================================================
+Posit Demo | Author: Raj Ravi
 
 
-DEMO NARRATIVE
---------------
-Frame the demo around a single key message:
-  "Posit Connect is the only platform where your R teams and Python teams deploy to
-   the same URL, share the same access controls, and run on the same infrastructure —
-   no silos, no duplication."
-
-Lead with the data story (it's compelling), then pivot to the platform story.
-
-
-TALKING POINTS BY SECTION
---------------------------
-
-1. SIDEBAR
-   - Dark blue (#003087) matches CDC brand; intentional for a government-data feel.
-   - Year Range slider: filters all charts simultaneously — great for showing 2015–2022
-     to capture the full fentanyl surge.
-   - Filter States: leave blank to show national data; select 2–3 high-burden states
-     (West Virginia, Kentucky, Ohio) to show state-level drill-down.
-   - Drug Categories: default selection covers the most policy-relevant categories.
-     Deselect "All Drug Overdoses" to focus on specific substances.
-
-2. KPI CARDS (top row)
-   - Latest 12-Month Total: provisional rolling count, not final — mention this caveat.
-   - All-Time Peak: automatically finds and displays the worst recorded period.
-   - Synthetic Opioid Deaths / % share: the headline stat — fentanyl now accounts for
-     ~70% of all overdose deaths, up from <15% in 2015. This is the data story.
-   - States Reporting + Highest Burden State: sets up the geographic tab.
-
-3. TAB 1 — NATIONAL TRENDS
-   - Start here. The line chart immediately shows the fentanyl inflection around 2016–2017.
-   - The COVID-19 annotation band (yellow) explains the sharp spike in 2020–2021 —
-     isolation, disrupted treatment access, and supply chain shifts drove this.
-   - Year-over-Year bar chart below shows sign of recent plateauing — hopeful signal.
-   - Good demo move: uncheck Heroin and show how its decline mirrors fentanyl's rise
-     (substitution effect).
-
-4. TAB 2 — STATE EXPLORER
-   - Choropleth map updates when you change the year dropdown — animate through years
-     to show the geographic spread westward over time.
-   - Top 20 state ranking bar chart: West Virginia consistently ranks #1 per capita.
-   - Select 2–3 states in the sidebar and return here — the trend chart at the bottom
-     appears, showing selected-state comparisons over time.
-
-5. TAB 3 — DRUG BREAKDOWN
-   - Stacked area chart shows the composition shift over time.
-   - Donut chart for latest year: fentanyl's share is visually striking.
-   - "Opioid Shift" line chart (Heroin vs Fentanyl): the crossover point (~2016) is
-     one of the most powerful single visuals in the deck — heroin fell as fentanyl
-     rose almost exactly inversely.
-
-6. TAB 4 — DEPLOY TO POSIT CONNECT
-   - Walk through the 3-step deploy: pip install rsconnect-python → add server → deploy.
-   - Emphasize: this is a single terminal command. No Docker, no K8s config, no IT ticket.
-   - The table showing both the R Shiny app and this Streamlit app on the same Connect
-     instance is the core platform pitch.
-   - Mention: Connect handles requirements.txt automatically — no environment setup needed.
+OPENING (30 seconds)
+---------------------
+"What I'm about to show you is a fully interactive drug overdose surveillance dashboard pulling live
+data directly from the CDC — no downloads, no spreadsheets, no manual updates. Every number you see
+is coming straight from the government's public health database in real time. And the entire thing
+was built in Python using a framework called Streamlit, in a single file — running side by side with
+an R Shiny app on the exact same Posit Connect server."
 
 
-KEY DATA TALKING POINTS
------------------------
-- Drug overdose deaths rose from ~52,000 in 2015 to over 110,000 in 2022.
-- Synthetic opioids (primarily illicitly manufactured fentanyl) drove nearly all of
-  the increase post-2016.
-- The COVID-19 pandemic accelerated deaths: 2020 saw the largest single-year jump on record.
-- All 50 states were affected; the epidemic shifted from Appalachia to include the West.
-- Source: CDC VSRR Provisional Drug Overdose Death Counts (12-month rolling, not final).
-  Always note "provisional" — final counts from NCHS may differ slightly.
+WHAT IS STREAMLIT? (1 minute)
+------------------------------
+"So — what is Streamlit? Think of it this way: normally, Python is a tool that data scientists use
+to analyze data, build models, and generate charts. The results stay on your screen and nobody else
+can see them. Streamlit changes that completely.
+
+Streamlit lets you take your Python code and turn it into a live web application — one that anyone
+can open in a browser, explore on their own, and interact with — no coding required, no installation,
+nothing. You go from data analysis to a shareable web app without ever leaving Python.
+
+What makes it powerful is automatic reactivity. Every filter, every slider, every dropdown is wired
+to every chart simultaneously. When you move the year slider — the trend lines update, the KPI cards
+update, the map updates — all at once. It feels instant, because it is."
 
 
-POSIT CONNECT PLATFORM PITCH
------------------------------
-- Both R Shiny and Python Streamlit apps live on ONE Connect instance.
-- Single sign-on, shared access control groups, one admin panel.
-- Schedulable content: pin the data refresh so the dashboard always reflects the
-  latest CDC API data without anyone manually running a script.
-- Vanity URLs: brand the app as connect.yourorg.com/cdc-overdose-dashboard.
-- Audit logs: track who viewed what — important for government/compliance use cases.
-- Works on-prem or in the cloud (AWS, Azure, GCP).
+WHY THIS MATTERS FOR POSIT (1 minute)
+--------------------------------------
+"Here's where it gets interesting. Your organization probably has R users and Python users. Shiny
+developers and Streamlit developers. Historically, those teams have lived on separate platforms,
+with separate deployment processes, separate access controls, separate infrastructure.
+
+Posit Connect eliminates that entirely.
+
+This Python Streamlit app and an R Shiny app — both live on the same Connect server, share the same
+URL structure, are governed by the same access control policies, and are managed from the same admin
+panel. One platform, one workflow, two languages. Your teams don't have to compromise on the tools
+they love."
+
+
+SIDEBAR CONTROLS (30 seconds)
+-------------------------------
+"On the left, I have three controls: a Year Range slider, a State filter, and a Drug Category
+selector. These are the user's controls — no coding required to use them.
+
+I'll leave states blank to show national data, and I'll keep the default drug categories which cover
+the most policy-relevant substances. Watch how every panel on the right responds the moment I adjust
+anything."
+
+
+KPI CARDS — TOP ROW (1 minute)
+--------------------------------
+"At the top, four summary cards give you the headline numbers immediately.
+
+The first — Latest 12-Month Total. This is the provisional rolling death count from the CDC's most
+recent release. I'll always note: these are provisional figures. Final counts from the National
+Center for Health Statistics may differ slightly, but the provisional data is what policymakers are
+working from right now.
+
+The second — All-Time Peak. The app automatically finds the worst recorded 12-month period in the
+dataset. You don't have to hunt for it.
+
+Third — Synthetic Opioid Deaths and their share of total overdoses. This is the headline statistic.
+Fentanyl now accounts for roughly 70% of all overdose deaths — up from under 15% in 2015. That
+single number tells the entire story of the opioid crisis shift.
+
+Fourth — States Reporting and the highest-burden state. This sets up the geographic tab."
+
+
+TAB 1: NATIONAL TRENDS (2 minutes — main demo)
+------------------------------------------------
+"This is the heart of the dashboard. The line chart shows 12-month rolling overdose deaths over time,
+broken out by drug category.
+
+The first thing you notice is the inflection around 2016 to 2017. That is the moment fentanyl
+entered the illicit drug supply at scale. Before that, the crisis was driven by prescription opioids
+and heroin. After that, synthetic opioids took over completely.
+
+See this yellow band? That is the COVID-19 period — March 2020 through mid-2021. The spike you see
+is not a coincidence. Isolation, disrupted treatment access, and supply chain shifts all hit
+simultaneously. 2020 recorded the largest single-year jump in overdose deaths in US history.
+
+Watch this — I'll uncheck Heroin from the drug categories. [deselect Heroin] Now look at the
+fentanyl line in isolation. Then I'll add Heroin back. [add back] You can see the inverse
+relationship — as heroin declined, fentanyl rose almost exactly in its place. That is the
+substitution effect, and it's one of the most important trends in modern public health.
+
+The bar chart below shows year-over-year change. Recent years show a potential plateauing — that
+is the most hopeful signal in this dataset."
+
+
+TAB 2: STATE EXPLORER (1 minute)
+----------------------------------
+"This tab goes geographic. The choropleth map shows overdose deaths by state for whatever year is
+selected in the dropdown. Move through the years and watch the crisis spread westward — what began
+concentrated in Appalachia expanded to cover nearly every region of the country.
+
+The ranking chart on the right shows the top 20 states by death count. West Virginia consistently
+leads — not in absolute numbers, but when you account for population size, it has carried the
+heaviest burden of any state for over a decade.
+
+Select states in the sidebar filter, and a trend comparison chart appears at the bottom — letting
+you track specific states side by side over the full time range."
+
+
+TAB 3: DRUG BREAKDOWN (1 minute)
+----------------------------------
+"This tab shows the composition of the crisis, not just the scale.
+
+The stacked area chart shows how the mix of substances has shifted over time. Heroin shrinks.
+Fentanyl expands. Cocaine and methamphetamine grow on separate tracks, showing the crisis is no
+longer just opioids — it is a broader polysubstance emergency.
+
+The donut chart gives you the current year's drug share at a glance. Fentanyl's slice is the
+most visually striking thing in the entire dashboard — and that is intentional.
+
+The Opioid Shift chart in the bottom right shows the crossover point — the exact year Fentanyl
+surpassed Heroin. For most audiences, this single chart is the one they remember."
+
+
+TAB 4: DEPLOY TO POSIT CONNECT (1 minute)
+-------------------------------------------
+"This final tab is the platform story made concrete.
+
+Three commands. That's it. Install rsconnect-python, add your server credentials once, and run the
+deploy command. Posit Connect reads the requirements.txt file, builds an isolated Python environment,
+and serves the app at a URL you define — without any IT involvement.
+
+The table at the bottom is the moment I always pause on. Two apps — the CDC PLACES Shiny dashboard
+built in R, and this Streamlit dashboard built in Python — both deployed from the same Connect
+instance. One URL, one access policy, one platform.
+
+That is the entire pitch. You do not have to choose between your R team and your Python team. You
+do not have to run two separate deployment platforms. Posit Connect handles both, together."
+
+
+CLOSING (45 seconds)
+---------------------
+"So to recap what this demonstrates:
+
+- Live data — it is not a static report. It pulls fresh data from the CDC API every hour
+  automatically. Nobody has to run a script or refresh a file.
+- Interactivity — a non-technical executive, a policymaker, a program officer can explore this
+  completely on their own. They do not need to know Python.
+- Speed to build — this entire dashboard, the charts, the map, the KPI cards, the filters —
+  was written in a single Python file.
+- Polyglot platform — this Python app and an R Shiny app run side by side on Posit Connect, with
+  shared access controls and one deployment workflow.
+- Deployable anywhere — one command publishes it to Connect. Share a link. Done.
+
+That is what Posit Connect does for a Python team. And it does the same for your R team. At the
+same time. On the same server."
+
+
+KEY STATS (if asked)
+---------------------
+- Drug overdose deaths rose from ~52,000 in 2015 to over 110,000 in 2022
+- Synthetic opioids (fentanyl) now account for ~70% of all overdose deaths
+- Data covers all 50 states plus DC, reported monthly with a 6–12 month lag
+- Source: CDC VSRR Provisional Drug Overdose Death Counts
+- App fetches data via the Socrata Open Data API at data.cdc.gov — same infrastructure
+  powering hundreds of government data portals
+- 12-month rolling counts are used (not monthly snapshots) for statistical stability
+- Cache TTL is 1 hour — data refreshes automatically on next load after expiry
 
 
 COMMON QUESTIONS
-----------------
-Q: Is the data real-time?
+-----------------
+Q: Is this data real-time?
 A: Provisional — CDC releases updates monthly. The app caches for 1 hour and fetches
-   fresh data automatically on the next load after the cache expires.
+   automatically. Final counts may differ slightly but provisional data is current.
 
 Q: Can you add authentication?
 A: Yes — Posit Connect integrates with LDAP, Active Directory, SAML, and OAuth.
-   You can lock it to internal users or make it public with one toggle.
+   Lock it to internal users or make it public with one toggle in the admin UI.
 
 Q: What about R users who don't know Python?
-A: They don't need to. The R Shiny equivalent app is deployed from the same Connect
-   server. This demo shows both side by side. Data scientists use whichever language
-   they prefer; Posit Connect handles both.
+A: They don't need to. The R Shiny version of this demo is deployed from the same
+   Connect server. Both teams work in their preferred language; Connect handles both.
 
-Q: How does environment management work?
-A: Connect reads requirements.txt (Python) or renv.lock (R) and builds isolated
-   environments per deployment. No dependency conflicts between apps.
-
-Q: Can this scale to larger datasets?
-A: Yes. The current app pulls ~10k rows from the CDC API. For larger data, you'd
-   point it at a database (Connect supports pins, database connections, and Vetiver
-   for model serving).
-
-
-TECHNICAL NOTES
----------------
-- Python 3.10+, Streamlit >= 1.32, Plotly >= 5.18, Pandas >= 2.0
-- Live data from: https://data.cdc.gov/resource/xkb8-kh2a.json (public, no auth needed)
-- Period filter: "12 month-ending" rolling counts — more stable than monthly snapshots
-- Cache TTL: 3600 seconds (1 hour) — adjust in load_data() if fresher data is needed
-- Layout: wide mode, custom CSS for CDC-branded sidebar (#003087 navy)
-- No secrets or API keys required for data access
-
-
-DEPLOY COMMAND (for live demo)
---------------------------------
-pip install rsconnect-python
-rsconnect add --server https://your-connect-server.example.com --name my-connect --api-key <KEY>
-rsconnect deploy streamlit --name my-connect --title "CDC Drug Overdose Dashboard" .
+Q: How does dependency management work?
+A: Connect reads requirements.txt and builds an isolated environment per deployment.
+   No dependency conflicts, no manual setup, no IT ticket required.
